@@ -17,7 +17,7 @@ class PhraseResourceTest extends FunSuite with Matchers with Inside with Eventua
   */
 /*
   test("asking for an alliterative phrase") {
-    Get() ~> addHeader("Accept", "text/plain") ~> namingRoute ~> check {
+    Get() ~> addHeader("Accept", "text/plain") ~> phraseRoute ~> check {
       inside(responseAs[String]) {
         case PhraseRegex(adjective, animal) =>
           List(adjective) should contain oneElementOf(adjectives.words)
@@ -32,7 +32,7 @@ class PhraseResourceTest extends FunSuite with Matchers with Inside with Eventua
     import spray.httpx.SprayJsonSupport._
     import demoapp.api.Phrase
 
-    Get() ~> namingRoute ~> check {
+    Get() ~> phraseRoute ~> check {
       inside(responseAs[Phrase]) {
         case Phrase(adjective, animal) =>
           List(adjective) should contain oneElementOf(adjectives.words)
@@ -44,7 +44,7 @@ class PhraseResourceTest extends FunSuite with Matchers with Inside with Eventua
   */
 /*
   test("asking for a phrase of specific letter") {
-    Get("/c") ~> addHeader("Accept", "text/plain") ~> namingRoute ~> check {
+    Get("/c") ~> addHeader("Accept", "text/plain") ~> phraseRoute ~> check {
       responseAs[String] shouldBe "curious cat"
     }
   }
@@ -52,7 +52,7 @@ class PhraseResourceTest extends FunSuite with Matchers with Inside with Eventua
     import spray.httpx.SprayJsonSupport._
     import demoapp.api.Phrase
 
-    Get("/c") ~> namingRoute ~> check {
+    Get("/c") ~> phraseRoute ~> check {
       responseAs[Phrase] shouldBe Phrase("curious", "cat")
     }
   }
